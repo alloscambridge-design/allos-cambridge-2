@@ -1,43 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Allos Cambridge - Apply</title>
-  <style>
-    body {font-family: Arial; max-width: 700px; margin: 40px auto; padding: 20px; background: #f5f7fa;}
-    h1,h2 {text-align: center; color: #1a365d;}
-    .form-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 15px;}
-    label {font-weight: bold; margin-top: 10px; display: block;}
-    input, select, textarea {width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;}
-    .full-width {grid-column: 1 / -1;}
-    .btn {background: #2563eb; color: white; padding: 12px; border: none; border-radius: 5px; margin-top: 20px; width: 100%; font-size: 16px;}
-    @media(max-width: 600px){.form-grid{grid-template-columns: 1fr;}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allos Cambridge Online Learning & Homeschooling</title>
+<meta name="description" content="Accredited Cambridge curriculum delivered online. IGCSE, A-Levels, Primary. Expert tutors. Flexible homeschooling worldwide.">
+<style>
+  :root {
+    --blue: #1e3a8a;
+    --red: #dc2626;
+    --white: #ffffff;
+    --light-gray: #f3f4f6;
+  }
+    * { box-sizing: border-box; margin:0; padding:0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color:#222; line-height:1.6; background:var(--white); }
+  
+  nav { background:var(--blue); color:var(--white); position:sticky; top:0; z-index:1000; }
+  .nav-container { max-width:1100px; margin:auto; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; }
+  .logo { font-size:1.3em; font-weight:bold; letter-spacing:1px; }
+  .logo span { color:var(--red); }
+  .menu-btn { display:none; background:none; border:none; color:var(--white); font-size:1.8em; cursor:pointer; }
+  .nav-links { display:flex; gap:20px; }
+  .nav-links a { color:var(--white); text-decoration:none; font-weight:500; }
+  .nav-links a:hover { color:var(--red); }
+
+  header { background:var(--blue); color:var(--white); text-align:center; padding:50px 20px 60px; }
+  header h1 { font-size:2em; margin-bottom:12px; }
+  header p { font-size:1.1em; margin:0 auto 25px; opacity:0.95; max-width:600px; }
+  .btn { display:inline-block; padding:12px 24px; margin:6px; background:var(--red); color:var(--white); text-decoration:none; border-radius:6px; font-weight:bold; transition:0.2s; border:none; cursor:pointer; }
+  .btn:hover { background:#b91c1c; }
+  .btn-outline { background:transparent; border:2px solid var(--white); }
+  .btn-outline:hover { background:var(--white); color:var(--blue); }
+
+  section { padding:45px 20px; max-width:1100px; margin:auto; }
+  h2 { color:var(--blue); margin-bottom:18px; border-left:4px solid var(--red); padding-left:12px; font-size:1.6em; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:16px; }
+  .card { background:var(--light-gray); padding:20px; border-radius:8px; border-top:3px solid var(--red); }
+  ul, ol { padding-left:20px; }
+  li { margin-bottom:8px; }
+  .pricing { text-align:center; }
+  .price { font-size:1.8em; color:var(--blue); font-weight:bold; margin:10px 0; }
+  .testimonial { font-style:italic; }
+  .testimonial strong { display:block; margin-top:10px; font-style:normal; color:var(--blue); }
+  
+  .faq-item { background:var(--light-gray); margin-bottom:12px; border-radius:8px; overflow:hidden; border-left:3px solid var(--red); }
+  .faq-question { padding:16px 20px; cursor:pointer; font-weight:bold; color:var(--blue); display:flex; justify-content:space-between; align-items:center; }
+  .faq-question::after { content:'+'; font-size:1.5em; color:var(--red); transition:0.3s; }
+  .faq-item.active .faq-question::after { content:'−'; }
+  .faq-answer { max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
+  .faq-answer p { padding:0 20px 16px; margin:0; }
+  
+  /* Forms */
+  form { display:grid; gap:12px; max-width:700px; margin:auto; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  input, select, textarea { padding:12px; border:1px solid #ccc; border-radius:6px; font-size:1em; font-family:inherit; }
+  input:focus, select:focus, textarea:focus { outline:2px solid var(--blue); border-color:var(--blue); }
+  label { font-weight:600; font-size:0.95em; color:var(--blue); }
+  .full-width { grid-column: 1 / -1; }
+  
+  footer { background:var(--blue); color:var(--white); text-align:center; padding:30px 20px; margin-top:30px; font-size:0.9em; }
+  a { color:var(--red); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  
+  .whatsapp-float { position:fixed; bottom:20px; right:20px; background:#25D366; color:white; border-radius:50px; padding:12px 18px; font-weight:bold; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:999; text-decoration:none; }
+  .whatsapp-float:hover { background:#128C7E; text-decoration:none; }
+
+  @media (max-width: 768px) {
+    .menu-btn { display:block; }
+    .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:var(--blue); flex-direction:column; padding:15px 20px; gap:15px; }
+    .nav-links.active { display:flex; }
+    header h1 { font-size:1.7em; }
+    section { padding:35px 16px; }
+    h2 { font-size:1.4em; }
+    .form-grid { grid-template-columns:1fr; }
+  }
+</style>
 </head>
 <body>
-  <h1>Allos Cambridge</h1>
-  <p style="text-align:center">International School for IGCSE & A-Levels</p>
+
+<nav>
+  <div class="nav-container">
+    <div class="logo">ALLOS <span>CAMBRIDGE</span></div>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about" onclick="toggleMenu()">About</a>
+      <a href="#programs" onclick="toggleMenu()">Programs</a>
+      <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+      <a href="#faq" onclick="toggleMenu()">FAQ</a>
+      <a href="#apply" onclick="toggleMenu()">Apply</a>
+      <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <h1>Learn Anywhere. Succeed Everywhere.</h1>
+  <p>Accredited Cambridge curriculum delivered online by expert tutors, designed for flexible homeschooling worldwide.</p>
+  <a href="#apply" class="btn">Apply Now</a>
+  <a href="#contact" class="btn btn-outline">Free Trial Class</a>
+</header>
+
+<section id="about">
+  <h2>About Us</h2>
+  <p>At Allos Cambridge Online Learning, we make world-class Cambridge education accessible from home. Our mission is to empower students aged 5-18 with critical thinking, confidence, and qualifications recognized by top universities globally. We blend live interactive lessons with self-paced resources to fit every learner.</p>
+</section>
+
+<section>
+  <h2>Why Choose Allos</h2>
+  <div class="grid">
+    <div class="card"><strong>Cambridge Accredited</strong><br>IGCSE, A-Levels, and Primary/Secondary checkpoints.</div>
+    <div class="card"><strong>Expert UK-Trained Tutors</strong><br>Small class sizes, personalized feedback.</div>
+    <div class="card"><strong>Flexible Homeschooling</strong><br>Learn on your schedule, from anywhere.</div>
+    <div class="card"><strong>Interactive Platform</strong><br>Live classes, recordings, quizzes, 24/7 support.</div>
+  </div>
+</section>
+
+<section id="programs">
+  <h2>Programs</h2>
+  <ul>
+    <li><strong>Primary & Lower Secondary:</strong> Build strong foundations in English, Maths, Science.</li>
+    <li><strong>IGCSE:</strong> 2-year program with exam preparation.</li>
+    <li><strong>A-Levels:</strong> Subject specialization for university entry.</li>
+    <li><strong>1-to-1 Tutoring:</strong> Tailored support for any subject or grade.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>How It Works</h2>
+  <ol>
+    <li><strong>Free Consultation:</strong> We assess your child’s level and goals.</li>
+    <li><strong>Personalized Plan:</strong> Choose subjects, pace, and schedule.</li>
+    <li><strong>Learn & Grow:</strong> Attend live classes, submit work, track progress.</li>
+    <li><strong>Exam Ready:</strong> Full support for Cambridge exam registration and prep.</li>
+  </ol>
+</section>
+
+<section id="pricing">
+  <h2>Pricing</h2>
+  <div class="grid pricing">
+    <div class="card">
+      <h3>Primary & Lower Secondary</h3>
+      <div class="price">$80</div>
+      <p>per subject/month</p>
+      <p>Live + recorded lessons + homework support</p>
+    </div>
+    <div class="card">
+      <h3>IGCSE</h3>
+      <div class="price">$120</div>
+      <p>per subject/month</p>
+      <p>Exam prep, past papers, mock exams</p>
+    </div>
+    <div class="card">
+      <h3>1-to-1 Tutoring</h3>
+      <div class="price">$25</div>
+      <p>per hour</p>
+      <p>Fully personalized sessions</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What Parents Say</h2>
+  <div class="grid">
+    <div class="card testimonial">
+      "My daughter went from struggling in math to scoring an A in IGCSE. The tutors are patient and explain everything clearly."
+      <strong>— Sarah K., Kenya</strong>
+    </div>
+    <div class="card testimonial">
+      "The flexibility is perfect for our family. We travel a lot, but my son never misses a lesson."
+      <strong>— Ahmed M., UAE</strong>
+    </div>
+    <div class="card testimonial">
+      "Professional, responsive, and genuinely care about students. Highly recommend Allos Cambridge."
+      <strong>— Grace L., Uganda</strong>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
   
-  <section id="apply">
-    <h2>Student Application & Admission</h2>
-    <p style="text-align:center">Complete this form. We’ll contact you within 24 hours.</p>
-    
-    <form action="mailto:alloscambridge@gmail.com" method="post" enctype="text/plain">
-      <div class="form-grid">
-        <div><label>Student Full Name *</label><input type="text" name="Student Name" required></div>
-        <div><label>Age *</label><input type="number" name="Age" min="5" max="18" required></div>
-        <div><label>Grade/Level *</label><select name="Grade" required><option value="">Select</option><option>Primary 1-6</option><option>Lower Secondary 7-9</option><option>IGCSE 10-11</option><option>A-Level 12-13</option></select></div>
-        <div><label>Program *</label><select name="Program" required><option value="">Select</option><option>Primary & Lower Secondary</option><option>IGCSE</option><option>A-Levels</option><option>1-to-1 Tutoring</option></select></div>
-        <div><label>Parent Name *</label><input type="text" name="Parent Name" required></div>
-        <div><label>Parent Email *</label><input type="email" name="Parent Email" required></div>
-        <div><label>Parent Phone *</label><input type="tel" name="Parent Phone" required></div>
-        <div><label>Country *</label><input type="text" name="Country" required></div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">Is the Cambridge curriculum internationally recognized?</div>
+    <div class="faq-answer">
+      <p>Yes. Cambridge qualifications like IGCSE and A-Levels are accepted by universities worldwide, including Harvard, Oxford, and University of Cape Town.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">What equipment does my child need?</div>
+    <div class="faq-answer">
+      <p>Just a laptop, tablet, or smartphone with stable internet. We use Zoom and Google Classroom for live lessons.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">Can students join mid-term?</div>
+    <div class="faq-answer">
+      <p>Yes. We offer rolling admissions with a catch-up plan and access to recordings.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">How are exams handled?</div>
+    <div class="faq-answer">
+      <p>We help you register for Cambridge exams at authorized centers in your country and provide full exam prep.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">What’s the class size?</div>
+    <div class="faq-answer">
+      <p>Group classes have 8-12 students max. 1-to-1 tutoring is also available.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Application & Admission Form -->
+<section id="apply">
+  <h2>Student Application & Admission</h2>
+  <p style="text-align:center; margin-bottom:20px;">Fill this form to start your application. We’ll contact you within 24 hours to schedule a free consultation.</p>
+  
+  <form action="mailto:alloscambridge@gmail.com" method="post" enctype="text/plain">
+    <div class="form-grid">
+      <div>
+        <label>Student Full Name *</label>
+        <input type="text" name="Student Name" required>
       </div>
-      <div class="full-width"><label>Subjects</label><input type="text" name="Subjects"></div>
-      <div class="full-width"><label>Questions?</label><textarea name="Message" rows="4"></textarea></div>
-      <button type="submit" class="btn">Submit Application</button>
-    </form>
-  </section>
+      <div>
+        <label>Age *</label>
+        <input type="number" name="Age" min="5" max="18" required>
+      </div>
+      
+      <div>
+        <label>Grade/Level *</label>
+        <select name="Grade" required>
+          <option value="">Select Grade</option>
+          <option>Primary 1-6</option>
+          <option>Lower Secondary 7-9</option>
+          <option>IGCSE 10-11</option>
+          <option>A-Level 12-13</option>
+        </select>
+      </div>
+      
+      <div>
+        <label>Program Interested In *</label>
+        <select name="Program" required>
+          <option value="">Select Program</option>
+          <option>Primary & Lower Secondary</option>
+          <option>IGCSE</option>
+          <option>A-Levels</option>
+          <option>1-to-1 Tutoring</option>
+        </select>
+      </div>
+      
+      <div>
+        <label>Parent/Guardian Name *</label>
+        <input type="text" name="Parent Name" required>
+      </div>
+      
+      <div>
+        <label>Parent Email *</label>
+        <input type="email" name="Parent Email" required>
+      </div>
+      
+      <div>
+        <label>Parent WhatsApp/Phone *</label>
+        <input type="tel" name="Parent Phone" required>
+      </div>
+      
+      <div>
+        <label>Country *</label>
+        <input type="text" name="Country" required>
+      </div>
+    </div>
+    
+    <div class="full-width">
+      <label>Subjects Interested In</label>
+      <input type="text" name="Subjects" placeholder="e.g. Math, English, Physics">
+    </div>
+    
+    <div class="full-width">
+      <label>Any Learning Needs or Questions?</label>
+      <textarea name="Message" rows="4" placeholder="Tell us about your child’s learning goals, challenges, or preferred schedule"></textarea>
+    </div>
+    
+    <button type="submit" class="btn full-width">Submit Application</button>
+  </form>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p style="text-align:center;">Have questions? Send us a message and we’ll reply within 24 hours.</p>
+  <form action="mailto:alloscambridge@gmail.com" method="post" enctype="text/plain">
+    <input type="text" name="Name" placeholder="Your Name" required>
+    <input type="email" name="Email" placeholder="Your Email" required>
+    <input type="text" name="Subject" placeholder="Subject">
+    <textarea name="Message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+  <p style="text-align:center; margin-top:20px;">
+    Or reach us directly:<br>
+    Email: <a href="mailto:alloscambridge@gmail.com">alloscambridge@gmail.com</a><br>
+    WhatsApp: <a href="https://wa.me/256706901823">+256 706 901 823</a><br>
+    Location: Online Worldwide 🌍
+  </p>
+</section>
+
+<footer>
+  <p>© 2026 Allos Cambridge Online Learning & Homeschooling. All rights reserved.</p>
+</footer>
+
+<a href="https://wa.me/256706901823" class="whatsapp-float">💬 WhatsApp Us</a>
+
+<script>
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('active');
+}
+
+function toggleFAQ(element) {
+  const item = element.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  item.classList.toggle('active');
+  if (item.classList.contains('active')) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  } else {
+    answer.style.maxHeight = 0;
+  }
+}
+</script>
+
 </body>
 </html>
