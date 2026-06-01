@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allos Cambridge - Apply</title>
+  <style>
+    body {font-family: Arial; max-width: 700px; margin: 40px auto; padding: 20px; background: #f5f7fa;}
+    h1,h2 {text-align: center; color: #1a365d;}
+    .form-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 15px;}
+    label {font-weight: bold; margin-top: 10px; display: block;}
+    input, select, textarea {width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;}
+    .full-width {grid-column: 1 / -1;}
+    .btn {background: #2563eb; color: white; padding: 12px; border: none; border-radius: 5px; margin-top: 20px; width: 100%; font-size: 16px;}
+    @media(max-width: 600px){.form-grid{grid-template-columns: 1fr;}}
+  </style>
+</head>
+<body>
+  <h1>Allos Cambridge</h1>
+  <p style="text-align:center">International School for IGCSE & A-Levels</p>
+  
+  <section id="apply">
+    <h2>Student Application & Admission</h2>
+    <p style="text-align:center">Complete this form. We’ll contact you within 24 hours.</p>
+    
+    <form action="mailto:alloscambridge@gmail.com" method="post" enctype="text/plain">
+      <div class="form-grid">
+        <div><label>Student Full Name *</label><input type="text" name="Student Name" required></div>
+        <div><label>Age *</label><input type="number" name="Age" min="5" max="18" required></div>
+        <div><label>Grade/Level *</label><select name="Grade" required><option value="">Select</option><option>Primary 1-6</option><option>Lower Secondary 7-9</option><option>IGCSE 10-11</option><option>A-Level 12-13</option></select></div>
+        <div><label>Program *</label><select name="Program" required><option value="">Select</option><option>Primary & Lower Secondary</option><option>IGCSE</option><option>A-Levels</option><option>1-to-1 Tutoring</option></select></div>
+        <div><label>Parent Name *</label><input type="text" name="Parent Name" required></div>
+        <div><label>Parent Email *</label><input type="email" name="Parent Email" required></div>
+        <div><label>Parent Phone *</label><input type="tel" name="Parent Phone" required></div>
+        <div><label>Country *</label><input type="text" name="Country" required></div>
+      </div>
+      <div class="full-width"><label>Subjects</label><input type="text" name="Subjects"></div>
+      <div class="full-width"><label>Questions?</label><textarea name="Message" rows="4"></textarea></div>
+      <button type="submit" class="btn">Submit Application</button>
+    </form>
+  </section>
+</body>
+</html>
